@@ -4,13 +4,13 @@
 
     connect();
 
-    const io = new Server(9000, {
+    const io = new Server(
     cors: {
-        origin: 'https://google-docs-backend.vercel.app/',
+        origin: 'https://google-docs-backend.vercel.app',
         methods: ['GET', 'POST'],
         credentials: true
     }
-    });
+    );
 
     io.on('connection', socket => {
     socket.on('get-doc', async documentID => {
