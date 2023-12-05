@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 const connect = async(username='docsuser',password='docsuser123')=>{
-    const url = `mongodb+srv://${username}:${password}@cluster0.lb8gg2f.mongodb.net/?retryWrites=true&w=majority`;
+    const url = `mongodb+srv://${username}:${password}@cluster0.lb8gg2f.mongodb.net/google-docs?retryWrites=true&w=majority`;
     try {
         await mongoose.connect(url);
         console.log("db connected");
