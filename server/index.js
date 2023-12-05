@@ -6,7 +6,7 @@
 
     const io = new Server(9000, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: 'https://lively-mochi-9c59ab.netlify.app/',
         methods: ['GET', 'POST']
     }
     });
