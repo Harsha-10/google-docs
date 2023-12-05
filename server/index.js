@@ -6,7 +6,7 @@
 
     const io = new Server(9000, {
     cors: {
-        origin: 'https://google-docs-cyqt.vercel.app/',
+        origin: 'https://google-docs-backend.vercel.app/',
         methods: ['GET', 'POST']
     }
     });
