@@ -6,7 +6,7 @@
 
     const io = new Server(9000, {
     cors: {
-        origin: 'https://lively-mochi-9c59ab.netlify.app/',
+        origin: 'https://google-docs.whq.vercel.app/',
         methods: ['GET', 'POST']
     }
     });
