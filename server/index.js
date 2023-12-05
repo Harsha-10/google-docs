@@ -7,7 +7,8 @@
     const io = new Server(9000, {
     cors: {
         origin: 'https://google-docs-backend.vercel.app/',
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST'],
+        credentials: true
     }
     });
 
