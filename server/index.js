@@ -7,9 +7,13 @@ const app = express();
 const url = process.env.MONGODB_URI || `mongodb+srv://docsuser:docsuser123@cluster0.lb8gg2f.mongodb.net/google-docs?retryWrites=true&w=majority`;
 connect(url);
 const PORT = process.env.PORT || 9000;
-const httpServer = createServer(app);
+const io = new Server(httpServer, {
+    cors: {
+        origin: "http://google-docs-server-zeta.vercel.app",
+        methods: ["GET", "POST"]
+    }
+    });
 httpServer.listen(PORT);
-const io = new Server(httpServer);
 io.on('connection', socket => {
 socket.on('get-doc', async documentID => {
     const doc = await getDocument(documentID);
