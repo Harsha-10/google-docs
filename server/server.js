@@ -11,10 +11,12 @@ const app = express();
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
 }
-const httpServer = createServer(app);
-httpServer.listen(PORT);
-const io = new Server(httpServer);
-
+const io = socket(server, {
+    cors: {
+        origin: 'https://https://google-docs-sage.vercel.app',
+        methods: ['GET', 'POST'],
+    },
+});
 io.on('connection', socket => {
 socket.on('get-doc', async documentID => {
     const doc = await getDocument(documentID);
