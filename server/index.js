@@ -10,7 +10,8 @@ const PORT = process.env.PORT || 9000;
 const io = new Server(httpServer, {
     cors: {
         origin: "http://google-docs-server-zeta.vercel.app",
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST"],
+        credentials: true
     }
     });
 httpServer.listen(PORT);
