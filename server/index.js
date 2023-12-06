@@ -3,8 +3,9 @@ import connect from "./db/database.js";
 import Document from "./schema/schema.js";
 import express from "express";
 import { createServer } from "http";
-
+const cors = require("cors");
 const app = express();
+app.use(cors());
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
