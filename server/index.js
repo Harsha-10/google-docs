@@ -9,7 +9,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: httpServer,
+    origin: "https://google-docs-virid.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
