@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import connect from "./db/database.js";
 import Document from "./schema/schema.js";
-import { Express } from "express";
+import express from "express";
 import { createServer } from "http";
 const app = express();
 const url = process.env.MONGODB_URI || `mongodb+srv://docsuser:docsuser123@cluster0.lb8gg2f.mongodb.net/google-docs?retryWrites=true&w=majority`;
