@@ -1,16 +1,15 @@
 import { Server } from "socket.io";
 import connect from "./db/database.js";
 import Document from "./schema/schema.js";
+import { Express } from "express";
+import { createServer } from "http";
+const app = express();
 const url = process.env.MONGODB_URI || `mongodb+srv://docsuser:docsuser123@cluster0.lb8gg2f.mongodb.net/google-docs?retryWrites=true&w=majority`;
 connect(url);
 const PORT = process.env.PORT || 9000;
-const io = socket(server, {
-    cors: {
-        origin: 'https://google-docs-server-zeta.vercel.app',
-        methods: ['GET', 'POST'],
-        credentials:true
-    },
-});
+const httpServer = createServer(app);
+httpServer.listen(PORT);
+const io = new Server(httpServer);
 io.on('connection', socket => {
 socket.on('get-doc', async documentID => {
     const doc = await getDocument(documentID);
