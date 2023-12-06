@@ -13,7 +13,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 const io = socket(server, {
     cors: {
-        origin: 'https://google-docs-virid.vercel.app',
+        origin: 'https:/google-docs-server-zeta.vercel.app',
         methods: ['GET', 'POST'],
     },
 });
