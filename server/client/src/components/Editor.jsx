@@ -39,7 +39,7 @@ const Editor = () => {
         setQuill(quill);
     }, [])
     useEffect(()=>{
-        const socketServer = io('https://google-docs-frontend-five.vercel.app');
+        const socketServer = io('');
         setSocket(socketServer);
         return ()=>{
             socketServer.disconnect(); 

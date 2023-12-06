@@ -1,16 +1,19 @@
 import { Server } from "socket.io";
 import connect from "./db/database.js";
 import Document from "./schema/schema.js";
+import { Express } from "express";
+import { createServer } from "http";
+require('dotenv').config();
 const url = process.env.MONGODB_URI || `mongodb+srv://docsuser:docsuser123@cluster0.lb8gg2f.mongodb.net/google-docs?retryWrites=true&w=majority`;
 connect(url);
-
-const io = new Server(http,{
-cors: {
-    origin: 'https://google-docs-backend.vercel.app',
-    methods: ['GET', 'POST'],
-    credentials: true
+const PORT = process.env.PORT || 9000;
+const app = express();
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
 }
-});
+const httpServer = createServer(app);
+httpServer.listen(PORT);
+const io = new Server(httpServer);
 
 io.on('connection', socket => {
 socket.on('get-doc', async documentID => {
