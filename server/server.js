@@ -30,7 +30,7 @@ httpServer.listen(PORT, () => {
 });
 const io = new Server(httpServer, {
     cors: {
-        origin: httpServer,
+        origin: "https://google-docs-ylsh.onrender.com",
         methods: ["GET", "POST"],
         credentials: true
     },

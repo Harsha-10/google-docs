@@ -39,7 +39,7 @@ const Editor = () => {
         setQuill(quill);
     }, [])
     useEffect(()=>{
-        const socketServer = io('');
+        const socketServer = io('https://google-docs-ylsh.onrender.com');
         setSocket(socketServer);
         return ()=>{
             socketServer.disconnect(); 
