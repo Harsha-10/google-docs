@@ -10,17 +10,19 @@ app.use(cors());
 const httpServer = createServer(app);
 const url =process.env.MONGODB_URI || "mongodb+srv://docsuser:docsuser123@cluster0.lb8gg2f.mongodb.net/google-docs?retryWrites=true&w=majority";
 connect(url);
-
+if(process.env.NODE_ENV=== 'production'){
+    app.use(express.static('client/build'));
+}
 const PORT = process.env.PORT || 9000;
+httpServer.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 const io = new Server(httpServer, {
     cors: {
-        origin: "https://google-docs-virid.vercel.app",
+        origin: httpServer,
         methods: ["GET", "POST"],
         credentials: true
     },
-});
-httpServer.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
 });
 io.on('connection', (socket) => {
     socket.on('get-doc', async (documentID) => {
