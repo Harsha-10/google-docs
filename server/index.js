@@ -6,23 +6,19 @@ import { createServer } from "http";
 require('dotenv').config();
 const cors = require("cors");
 const app = express();
-app.use(cors());
 const httpServer = createServer(app);
 const url =process.env.MONGODB_URI || "mongodb+srv://docsuser:docsuser123@cluster0.lb8gg2f.mongodb.net/google-docs?retryWrites=true&w=majority";
 connect(url);
-
 const PORT = process.env.PORT || 9000;
-
 httpServer.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-const io = require('socket.io')(Server(httpServer, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
-        credentials: true,
-    },
-}));
+app.use(cors({
+    origin: 'https://google-docs-virid.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    }));
+const io = require('socket.io')(Server(httpServer));
 io.on('connection', (socket) => {
     socket.on('get-doc', async (documentID) => {
         const doc = await getDocument(documentID);
