@@ -1,12 +1,12 @@
 {
-  "name": "index",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "node server.js",
     "client-install": "cd client && npm install",
     "client-build": "cd client && npm run build"
   },
