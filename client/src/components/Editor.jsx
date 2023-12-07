@@ -41,7 +41,6 @@ const Editor = () => {
     useEffect(()=>{
         const socketServer = io('https://google-docs-server-zeta.vercel.app', {
             withCredentials: true,
-            transports : ['websocket', 'polling', 'streaming']
         });
         setSocket(socketServer);
         return ()=>{
