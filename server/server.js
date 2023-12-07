@@ -3,7 +3,6 @@ import connect from "./db/database.js";
 import Document from "./schema/schema.js";
 import express from "express";
 import { createServer } from "http";
-import path from "path";
 require('dotenv').config();
 const cors = require("cors");
 const path = require('path');
