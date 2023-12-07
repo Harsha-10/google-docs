@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 9000;
 const io = new Server(httpServer, {
     cors: {
         origin: "https://google-docs-virid.vercel.app",
+        methods: ["GET", "POST"],
         credentials: true
     },
 });
