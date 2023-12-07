@@ -13,11 +13,17 @@ const PORT = process.env.PORT || 9000;
 httpServer.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-app.use(cors({
-    origin: 'https://google-docs-virid.vercel.app',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    }));
+if (process.env.NODE_ENV === 'production') {
+    io.engine.on('initial_headers', (headers, req) => {
+        headers['Access-Control-Allow-Origin'] = 'https://google-docs-virid.vercel.app';
+        headers['Access-Control-Allow-Credentials'] = true;
+    });
+
+    io.engine.on('headers', (headers, req) => {
+        headers['Access-Control-Allow-Origin'] = 'https://google-docs-virid.vercel.app';
+        headers['Access-Control-Allow-Credentials'] = true;
+    });
+}
 const io = require('socket.io')(Server(httpServer));
 io.on('connection', (socket) => {
     socket.on('get-doc', async (documentID) => {
