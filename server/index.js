@@ -3,6 +3,7 @@ import connect from "./db/database.js";
 import Document from "./schema/schema.js";
 import express from "express";
 import { createServer } from "http";
+require('dotenv').config();
 const cors = require("cors");
 const app = express();
 app.use(cors());
@@ -15,13 +16,13 @@ const PORT = process.env.PORT || 9000;
 httpServer.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-const io = new Server(httpServer, {
+const io = require('socket.io')(Server(httpServer, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
         credentials: true,
     },
-});
+}));
 io.on('connection', (socket) => {
     socket.on('get-doc', async (documentID) => {
         const doc = await getDocument(documentID);
