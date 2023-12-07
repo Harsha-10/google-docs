@@ -6,25 +6,22 @@ import { createServer } from "http";
 require('dotenv').config();
 const cors = require("cors");
 const app = express();
+app.use(cors());
 const httpServer = createServer(app);
 const url =process.env.MONGODB_URI || "mongodb+srv://docsuser:docsuser123@cluster0.lb8gg2f.mongodb.net/google-docs?retryWrites=true&w=majority";
 connect(url);
+
 const PORT = process.env.PORT || 9000;
+const io = new Server(httpServer, {
+    cors: {
+        origin: "https://google-docs-virid.vercel.app",
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
+    },
+});
 httpServer.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-if (process.env.NODE_ENV === 'production') {
-    io.engine.on('initial_headers', (headers, req) => {
-        headers['Access-Control-Allow-Origin'] = 'https://google-docs-virid.vercel.app';
-        headers['Access-Control-Allow-Credentials'] = true;
-    });
-
-    io.engine.on('headers', (headers, req) => {
-        headers['Access-Control-Allow-Origin'] = 'https://google-docs-virid.vercel.app';
-        headers['Access-Control-Allow-Credentials'] = true;
-    });
-}
-const io = require('socket.io')(Server(httpServer));
 io.on('connection', (socket) => {
     socket.on('get-doc', async (documentID) => {
         const doc = await getDocument(documentID);
