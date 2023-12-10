@@ -127,7 +127,7 @@ const Editor = () => {
         setQuill(quill);
     }, [])
     useEffect(()=>{
-        const socketServer = io('http://localhost:9000');
+        const socketServer = io('https://google-docs-ylsh.onrender.com');
         setSocket(socketServer);
         return ()=>{
             socketServer.disconnect(); 
