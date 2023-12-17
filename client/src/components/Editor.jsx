@@ -234,7 +234,7 @@ const Editor = () => {
     
     return (
         <Component>
-            <Box className='container text-editor' id='container'></Box>
+            <Box className='container text-editor' id='container' sx={{ maxWidth: '65%' }}></Box>
         </Component>
     )
 }
